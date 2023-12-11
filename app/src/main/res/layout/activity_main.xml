@@ -14,6 +14,7 @@
         android:layout_marginTop="180dp"
         android:gravity="center"
         android:hint="@string/enter_code_text"
+        android:maxLength="4"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +57,7 @@
         android:layout_width="81dp"
         android:layout_height="52dp"
         android:layout_marginTop="16dp"
-        android:text="@string/fore_button"
+        android:text="@string/four_button"
         app:layout_constraintStart_toStartOf="@+id/button1"
         app:layout_constraintTop_toBottomOf="@+id/button1" />
 

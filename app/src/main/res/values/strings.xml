@@ -8,9 +8,9 @@
     <string name="seven_button">7</string>
     <string name="six_button">6</string>
     <string name="five_button">5</string>
-    <string name="fore_button">4</string>
+    <string name="four_button">4</string>
     <string name="three_button">3</string>
     <string name="two_button">2</string>
     <string name="one_button">1</string>
-    <string name="left_arrow_button"><![CDATA[<]]></string>
+    <string name="code_correct">Код введен верно!</string>
 </resources>
