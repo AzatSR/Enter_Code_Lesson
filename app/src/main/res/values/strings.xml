@@ -12,5 +12,6 @@
     <string name="three_button">3</string>
     <string name="two_button">2</string>
     <string name="one_button">1</string>
+    <string name="left_arrow_button"><![CDATA[<]]></string>
     <string name="code_correct">Код введен верно!</string>
 </resources>

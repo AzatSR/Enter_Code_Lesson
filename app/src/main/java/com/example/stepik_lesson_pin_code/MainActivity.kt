@@ -8,9 +8,10 @@ import android.widget.TextView
 import android.widget.Toast
 
 const val CORRECT_CODE = "1567"
+const val CODE_LENGTH = 4
 class MainActivity : AppCompatActivity() {
 
-    var enterField = ""
+    private var enterField = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun initNumButton(){
+    private fun initNumButton(){
         val firstBt: Button = findViewById(R.id.button1)
         firstBt.setOnClickListener(this::onClickButton)
         val secondBt: Button = findViewById(R.id.button2)
@@ -57,7 +58,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun onClickButton(view: View){
+    private fun onClickButton(view: View){
         if (view !is Button) {
             return // если view-а не кнопка, то уходим
                    // в остальных случаях можно взять из нее текст
@@ -67,12 +68,15 @@ class MainActivity : AppCompatActivity() {
         updateTextView()
     }
 
-    fun updateTextView(){
+    private fun updateTextView(){
         val tv: TextView = findViewById(R.id.textView)
+        if (enterField.length > CODE_LENGTH){
+            enterField = enterField.substring(0, CODE_LENGTH)
+        }
         tv.text = enterField
     }
 
-    fun initBackSpace(){
+    private fun initBackSpace(){
         val back: Button = findViewById(R.id.button10)
         back.setOnClickListener {
             enterField = enterField.dropLast(1)
