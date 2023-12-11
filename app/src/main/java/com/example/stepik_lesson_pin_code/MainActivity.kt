@@ -6,19 +6,29 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 
 const val CORRECT_CODE = "1567"
 const val CODE_LENGTH = 4
 class MainActivity : AppCompatActivity() {
 
     private var enterField = ""
+    private lateinit var tv: TextView
+    private val primaryColor = ContextCompat.getColor(this, R.color.color_primary)
+    private val redColor = ContextCompat.getColor(this, R.color.error)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        initTextView()
         initNumButton()
         initBackSpace()
         initOKButton()
 
+    }
+
+    fun initTextView(){
+        tv = findViewById(R.id.textView)
     }
 
     private fun initOKButton() {
@@ -31,6 +41,8 @@ class MainActivity : AppCompatActivity() {
     private fun checkedCorrectEneterCode() {
         if (enterField == CORRECT_CODE){
             Toast.makeText(this, R.string.code_correct, Toast.LENGTH_SHORT).show()
+        } else {
+            tv.setTextColor(redColor)
         }
     }
 
@@ -69,11 +81,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateTextView(){
-        val tv: TextView = findViewById(R.id.textView)
         if (enterField.length > CODE_LENGTH){
             enterField = enterField.substring(0, CODE_LENGTH)
         }
         tv.text = enterField
+        tv.setTextColor(primaryColor)
     }
 
     private fun initBackSpace(){
