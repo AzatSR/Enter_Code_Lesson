@@ -10,4 +10,5 @@
     <color name="color_primary">#1789DB</color>
     <color name="button_bg">#F5F5F5</color>
     <color name="error">#F91717</color>
+    <color name="green">#1FB53F</color>
 </resources>

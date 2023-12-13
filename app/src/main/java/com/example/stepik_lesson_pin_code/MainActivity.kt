@@ -1,46 +1,77 @@
 package com.example.stepik_lesson_pin_code
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
+import kotlin.properties.Delegates
+
 
 const val CORRECT_CODE = "1567"
 const val CODE_LENGTH = 4
+const val KEY_COUNTER = "001"
+const val KEY_COUNTER_COLOR = "002"
 class MainActivity : AppCompatActivity() {
 
     private var enterField = ""
     private lateinit var tv: TextView
-    private val primaryColor = ContextCompat.getColor(this, R.color.color_primary)
-    private val redColor = ContextCompat.getColor(this, R.color.error)
+    private var primaryColor by Delegates.notNull<Int>()
+    private var redColor by Delegates.notNull<Int>()
+    private var greenColor by Delegates.notNull<Int>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        savedInstanceState?.getString(KEY_COUNTER)?.let { it ->
+            enterField = it
+        }
 
         initTextView()
         initNumButton()
         initBackSpace()
         initOKButton()
+        initColors()
+        updateTextView()
 
+        savedInstanceState?.getInt(KEY_COUNTER_COLOR)?.let { it ->
+            tv.setTextColor(it)
+        }
+    }
+    private fun initColors(){
+        primaryColor = ResourcesCompat.getColor(resources, R.color.color_primary, null)
+        redColor = ResourcesCompat.getColor(resources, R.color.error, null)
+        greenColor = ResourcesCompat.getColor(resources, R.color.green, null)
     }
 
-    fun initTextView(){
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString(KEY_COUNTER, enterField)
+        outState.putInt(KEY_COUNTER_COLOR, tv.currentTextColor)
+        super.onSaveInstanceState(outState)
+    }
+
+    private fun initTextView(){
         tv = findViewById(R.id.textView)
     }
 
     private fun initOKButton() {
         val ok: Button = findViewById(R.id.button12)
         ok.setOnClickListener {
-            checkedCorrectEneterCode()
+            checkedCorrectEnterCode()
         }
     }
 
-    private fun checkedCorrectEneterCode() {
+    private fun checkedCorrectEnterCode() {
         if (enterField == CORRECT_CODE){
-            Toast.makeText(this, R.string.code_correct, Toast.LENGTH_SHORT).show()
+            tv.setTextColor(greenColor)
+
+            val intent = Intent(this, SecondActivity::class.java)
+            startActivity(intent)
+
         } else {
             tv.setTextColor(redColor)
         }
